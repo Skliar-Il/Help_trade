@@ -9,3 +9,7 @@ POSTGRES_PORT = os.environ.get("POSTGRES_PORT")
 
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN")
 
+CHAT_ID = os.environ.get("CHAT_ID")
+USER_ID = os.environ.get("USER_ID")
+
+

@@ -13,6 +13,7 @@ sys.path.append(os.path.join(sys.path[0][:-7], "src"))
 from config import POSTGRES_HOST, POSTGRES_NAME, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER
 from connect_db import Base
 from models.users import *
+from models.message import *
 
 config = context.config
 

@@ -1,5 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker, AsyncSession, create_async_engine
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+from sqlalchemy import create_engine
 from typing import AsyncGenerator
 import os
 import sys
@@ -10,14 +10,12 @@ from config import POSTGRES_HOST, POSTGRES_NAME, POSTGRES_PASSWORD, POSTGRES_USE
 class Base(DeclarativeBase):
     pass
 
-DATABASE_URL = f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_NAME}"
+DATABASE_URL = f"postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_NAME}"
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_engine(DATABASE_URL)
 
-async_session_maker = async_sessionmaker(engine, expire_on_commit=False)
+session_maker = sessionmaker(engine, expire_on_commit=False)
 
-async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
-    async with async_session_maker as session: 
-        yield session
+
 
         
