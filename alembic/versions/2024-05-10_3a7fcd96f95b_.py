@@ -5,7 +5,6 @@ Revises:
 Create Date: 2024-05-10 00:01:32.211537
 
 """
-#созда начальная база данных без оплаты 
 from typing import Sequence, Union
 
 from alembic import op
