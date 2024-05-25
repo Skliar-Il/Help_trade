@@ -16,7 +16,7 @@ bot = TeleBot(TG_BOT_TOKEN)
 
 @bot.message_handler(commands=["start"])    
 def start(message):
-    bot.send_message(message.chat.id, "win")
+    bot.send_message(message.chat.id, message.id)
         
     
     # bot.send_message(message.chat.id, message.id)
@@ -54,9 +54,8 @@ def callback(callback):
     
 
     
-
-
 check_new_message()
+#https://api.telegram.org/bot6254570600:AAEJsGiYR2qkNucd3FA3-XUp77_TLfkKOWo/sendMessage?chat_id=1511626416&text=Привет, как дела?
 bot.polling(non_stop=True)
 
 
