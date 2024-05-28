@@ -16,6 +16,8 @@ class Table_Users(Base):
     id: Mapped[int] = mapped_column(primary_key = True)
     tg_id: Mapped[int]
     tg_teg: Mapped[str]
+    subscribe: Mapped[bool] = mapped_column(default=False, nullable=False)
     create_time: Mapped[datetime.datetime] = mapped_column(server_default=text("TIMEZONE('utc', now())"))
+    
 
     
