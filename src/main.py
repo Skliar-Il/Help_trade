@@ -1,11 +1,11 @@
 from telebot import *
 from sqlalchemy import select, insert, update
 
-from config import TG_BOT_TOKEN, MESSAGE_PASSWORD
+from config import TG_BOT_TOKEN, MESSAGE_PASSWORD, GROUP_CHAT_ID, CHAT_ID
 from connect_db import session_maker
 from models.users import Table_Users
-from check import check_new_message
 from telebot.types import Message
+from check import check_new_message
 
 import time
 import asyncio
@@ -35,9 +35,11 @@ def start(message):
 def check_last_message(message):
     bot.register_next_step_handler(bot.send_message(message.chat.id, "Введите пароль"), check_password)
 
+
 def check_password(message):
     if message.text == MESSAGE_PASSWORD:
         bot.send_message(message.chat.id, message.id)
+
 
 @bot.callback_query_handler(func=lambda callback: True)
 def callback(callback):
@@ -84,9 +86,21 @@ def callback(callback):
         markup.add(types.InlineKeyboardButton("Меню", callback_data="menu"))
         bot.send_message(callback.message.chat.id, "Вы отписались ❌", reply_markup=markup)
         
-    
-check_new_message()
+
 #https://api.telegram.org/bot6254570600:AAEJsGiYR2qkNucd3FA3-XUp77_TLfkKOWo/sendMessage?chat_id=1511626416&text=Привет, как дела?
+    
+def register_new_message(message):
+    bot.send_message(CHAT_ID, message.text)
+    register_next_message(message)
+
+
+@bot.message_handler(["register_next_message"])
+def register_next_message(message):
+        bot.register_next_step_handler(bot.send_message(GROUP_CHAT_ID, "Регистрирую"), register_new_message)
+        
+
+
+#check_new_message()
 bot.polling(non_stop=True)
 
 

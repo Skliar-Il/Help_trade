@@ -13,6 +13,7 @@ CHAT_ID = os.environ.get("CHAT_ID")
 USER_ID = os.environ.get("USER_ID")
 
 MESSAGE_PASSWORD = os.environ.get("MESSAGE_PASSWORD")
+GROUP_CHAT_ID = os.environ.get("GROUP_CHAT_ID")
 
 
 

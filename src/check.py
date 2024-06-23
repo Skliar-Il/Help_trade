@@ -14,8 +14,9 @@ def check_last_message_id():
         
     
         try:
-            message = bot.copy_message(CHAT_ID, CHAT_ID, 1+last_id)
-            last_id = last_id + 2
+            message = bot.copy_message(CHAT_ID, CHAT_ID, last_id)
+            last_id = message.message_id + 1 #dvtcnj + 2 менять на новый id и все заработает message.message_id+1
+            print(message)
             session.execute(update(Table_id).values({"last_message_id": last_id}).where(Table_id.id == 1))
             session.commit()
             
@@ -34,6 +35,10 @@ def check_last_message_id():
 def check_new_message():
     Timer(5, check_new_message).start()
     check_last_message_id()
+    
+    
+def register_new_message(message):
+    bot.send_message(CHAT_ID, message.text)
 
         
 
